@@ -1,0 +1,21 @@
+[
+  {
+    "time": "19-07-2020 5:42 PM",
+    "title": "Room database",
+    "desc": "RoomDatabase provides direct access to the underlying database implementation but you should prefer using Dao classes.",
+    "priority": 3
+  },
+  {
+    "time": "19-07-2020 5:42 PM",
+    "title": "LiveData",
+    "desc": "LiveData is an observable data holder class. Unlike a regular observable, LiveData is lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities, fragments, or services. This awareness ensures LiveData only updates app component observers that are in an active lifecycle state.",
+    "priority": 1
+  }
+  ,
+  {
+    "time": "19-07-2020 5:42 PM",
+    "title": "ViewModel",
+    "desc": "ViewModel is a class that is responsible for preparing and managing the data for an Activity or a Fragment. It also handles the communication of the Activity / Fragment with the rest of the application (e.g. calling the business logic classes). ",
+    "priority": 2
+  }
+]
