@@ -6,6 +6,20 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="android:windowBackground">@color/backgroundColor</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        
+        <item name="buttonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
+
     </style>
+
+    <style name="GreenText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#8E24AA</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
 
 </resources>

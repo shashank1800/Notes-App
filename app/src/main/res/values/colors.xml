@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+    <color name="backgroundColor">#eee</color>
 
     <color name="medium">#FDD835</color>
     <color name="low">#43A047</color>

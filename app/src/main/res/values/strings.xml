@@ -45,5 +45,7 @@
     <string name="channel_name">Expiry date</string>
     <string name="yes">" Yes "</string>
     <string name="popup_regarding_notes">Do you want to add notes</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_button">Edit Button</string>
 
 </resources>

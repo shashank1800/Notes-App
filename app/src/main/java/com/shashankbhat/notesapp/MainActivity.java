@@ -3,25 +3,33 @@ package com.shashankbhat.notesapp;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.shashankbhat.notesapp.adapters.MainRecyclerAdapter;
+import com.shashankbhat.notesapp.room.Note;
 import com.shashankbhat.notesapp.service.NotifyNotes;
 import com.shashankbhat.notesapp.ui.add_notes.AddNotes;
 import com.shashankbhat.notesapp.ui.settings.SettingsActivity;
@@ -53,7 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setAction(getString(R.string.yes), moveToAddNotes()).show());
 
         RecyclerView recycler = findViewById(R.id.main_rv);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
+
+        if(getResources().getBoolean(R.bool.isTablet))
+            recycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        else
+            recycler.setLayoutManager(new LinearLayoutManager(this));
         MainRecyclerAdapter adapter = new MainRecyclerAdapter();
         recycler.setAdapter(adapter);
 
@@ -63,6 +75,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         viewModel.getAllNotes().observe(this, adapter::submitList);
 
+        initSettingFragment();
+    }
+
+    private void initSettingFragment() {
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
+
+        SharedPreferences sharedPref = PreferenceManager
+                        .getDefaultSharedPreferences(this);
+        boolean switchPref = sharedPref.getBoolean
+                (SettingsActivity.KEY_PREF_EXAMPLE_SWITCH, false);
+        Toast.makeText(this, Boolean.toString(switchPref),
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -86,13 +110,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 10, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
-
-        // With setInexactRepeating(), you have to use one of the AlarmManager interval
-        // constants--in this case, AlarmManager.INTERVAL_DAY.
+        calendar.set(Calendar.HOUR, 12);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
         assert alarmMgr != null;
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
 
     }
 
@@ -100,15 +122,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(1, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder v, @NonNull RecyclerView.ViewHolder v1) {
-                return false;
+
+                return true;
             }
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                viewModel.vmDelete(Objects.requireNonNull(adapter.getCurrentList()).get(viewHolder.getAdapterPosition()));
+                Note note = Objects.requireNonNull(adapter.getCurrentList()).get(viewHolder.getAdapterPosition());
+                deleteAlert(note);
             }
         }).attachToRecyclerView(recyclerView);
     }
+
+    public void deleteAlert(Note note) {
+        AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
+
+        myAlertBuilder.setTitle("Delete");
+        myAlertBuilder.setMessage("Do yo want to delete this note ?");
+        myAlertBuilder.setPositiveButton(R.string.yes, (dialog, which) -> viewModel.vmDelete(note));
+        myAlertBuilder.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
+        myAlertBuilder.show();
+    }
+
 
     private View.OnClickListener moveToAddNotes() {
         return view -> startActivity(new Intent(getApplicationContext(), AddNotes.class));

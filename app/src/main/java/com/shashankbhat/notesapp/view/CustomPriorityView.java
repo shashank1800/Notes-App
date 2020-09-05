@@ -14,34 +14,27 @@ import com.shashankbhat.notesapp.R;
  */
 public class CustomPriorityView extends AppCompatImageView {
 
+    public static final String TAG = "CustomView";
 
     public CustomPriorityView(Context context) {
         super(context);
-        Log.i("Custom","c");
         init();
     }
 
     public CustomPriorityView(Context context, AttributeSet attrs) {
         super(context, attrs,0);
-        Log.i("Custom","c a");
-        init();
 
+        TypedArray customPriorityView = context.obtainStyledAttributes(attrs, R.styleable.CustomPriorityView);
+        try{
+            int priority = customPriorityView.getInt(R.styleable.CustomPriorityView_priority, 1);
+            setPriority(priority);
+        }finally {
+            customPriorityView.recycle();
+        }
     }
 
     public CustomPriorityView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        TypedArray customPriorityView = context.obtainStyledAttributes(attrs, R.styleable.CustomPriorityView);
-
-        try{
-            int attr = customPriorityView.getIndex(0);
-            if(attr == R.styleable.CustomPriorityView_priority) {
-                int priority = customPriorityView.getInt(attr, 1);
-                setPriority(priority);
-            }
-        }finally {
-            customPriorityView.recycle();
-        }
     }
 
     public void setPriority(int priority){
@@ -57,6 +50,12 @@ public class CustomPriorityView extends AppCompatImageView {
                 setImageResource(R.drawable.ic_star_red);
                 break;
         }
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        Log.i(TAG,"onLayout"+ left  + top + right+ bottom);
     }
 
     private void init(){

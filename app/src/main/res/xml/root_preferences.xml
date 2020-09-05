@@ -1,6 +1,12 @@
 <PreferenceScreen
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <SwitchPreferenceCompat
+        app:defaultValue="true"
+        app:key="example_switch"
+        app:summary="This is summary for switch"
+        app:title="Title for Switch" />
+
     <ListPreference
         app:defaultValue="en"
         app:entries="@array/languages_entries"

@@ -37,6 +37,7 @@
             android:ems="10"
             android:text="@={title}"
             android:hint="@string/title"
+            android:autofillHints="@string/title"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
             android:ems="10"
             android:text="@={description}"
             android:hint="@string/description"
+            android:autofillHints="@string/description"
             android:inputType="text"
             app:layout_constraintTop_toBottomOf="@+id/title_et"
             tools:layout_editor_absoluteX="10dp" />
@@ -119,6 +121,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
