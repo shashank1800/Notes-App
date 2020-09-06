@@ -37,6 +37,7 @@ public class CustomPriorityView extends AppCompatImageView {
         super(context, attrs, defStyleAttr);
     }
 
+
     public void setPriority(int priority){
 
         switch (priority){
