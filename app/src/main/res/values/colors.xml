@@ -4,9 +4,14 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-    <color name="backgroundColor">#eee</color>
+    <color name="mainBackgroundColor">#fff</color>
 
     <color name="medium">#FDD835</color>
     <color name="low">#43A047</color>
     <color name="high">#D81B60</color>
+
+    <color name="random_color_1">#FBF0E1</color>
+    <color name="random_color_2">#C9E6FF</color>
+    <color name="random_color_3">#CDFFCF</color>
+    <color name="random_color_4">#FDD6E5</color>
 </resources>

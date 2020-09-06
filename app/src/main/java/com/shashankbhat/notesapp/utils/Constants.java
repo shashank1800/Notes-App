@@ -14,6 +14,4 @@ public class Constants {
     public static final int PRIORITY_MED = 2;
     public static final int PRIORITY_HIGH = 3;
 
-
-
 }

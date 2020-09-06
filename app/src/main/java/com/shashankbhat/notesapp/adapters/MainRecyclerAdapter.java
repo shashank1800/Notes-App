@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,21 +54,24 @@ public class MainRecyclerAdapter extends PagedListAdapter<Note, MainRecyclerAdap
         //Custom component
         CustomPriorityView priorityView;
 
+        ConstraintLayout layoutBackground;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             desc = itemView.findViewById(R.id.desc);
             imageButton = itemView.findViewById(R.id.edit);
             imageButton.setOnClickListener(this);
+            layoutBackground = itemView.findViewById(R.id.layout_background);
 
             //Custom component
             priorityView = itemView.findViewById(R.id.customPriorityView);
-
         }
 
         private void bindData(Note note) {
             title.setText(note.getTitle());
             desc.setText(note.getDescription());
+            layoutBackground.getBackground().setTint(getRandomColor());
 
             //Custom component
             priorityView.setPriority(note.getPriority());
@@ -76,6 +81,21 @@ public class MainRecyclerAdapter extends PagedListAdapter<Note, MainRecyclerAdap
         public void onClick(View v) {
 
         }
+    }
+
+    private int getRandomColor(){
+
+        int min = 0, max = 3;
+        int randomNumber = (int)(Math.random() * (max - min + 1) + min);
+
+        switch (randomNumber){
+            case 0: return ContextCompat.getColor(context, R.color.random_color_1);
+            case 1: return ContextCompat.getColor(context, R.color.random_color_2);
+            case 2: return ContextCompat.getColor(context, R.color.random_color_3);
+            case 3: return ContextCompat.getColor(context, R.color.random_color_4);
+        }
+
+        return context.getColor(R.color.high);
     }
 
     public static DiffUtil.ItemCallback<Note> DIFF_CALLBACK = new DiffUtil.ItemCallback<Note>() {

@@ -1,4 +1,4 @@
-package com.shashankbhat.notesapp;
+package com.shashankbhat.notesapp.viewmodel;
 
 import android.app.Application;
 
@@ -17,7 +17,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     private NoteRepository noteRepository;
 
-    public MainActivityViewModel(@NonNull Application application) {
+    public MainActivityViewModel(@NonNull Application application, int randomValue) {
         super(application);
         noteRepository = new NoteRepository(application);
     }

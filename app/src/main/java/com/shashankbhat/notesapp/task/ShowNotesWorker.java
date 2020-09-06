@@ -33,8 +33,9 @@ public class ShowNotesWorker extends Worker {
         if(repository.repoListDateBasedNotes()!=null){
             Note note = repository.repoListDateBasedNotes();
             NotificationUtil.notify(context, note);
+            return Result.success();
         }
 
-        return Result.success();
+        return Result.failure();
     }
 }

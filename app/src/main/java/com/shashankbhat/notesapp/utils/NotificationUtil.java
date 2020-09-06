@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
@@ -27,7 +28,7 @@ public class NotificationUtil {
 
     public static String NOTIFICATION_CHANNEL_ID = "CHANNEL ID";
     public static int PENDING_INTENT_CHANNEL_ID = 1001;
-    public static final int NOTIFICATION_ID = 1002;
+    public static final int NOTIFICATION_ID = 10;
 
     public static void notify(Context context, Note note){
 
@@ -35,8 +36,9 @@ public class NotificationUtil {
                 .setSmallIcon(R.drawable.ic_star_yellow)
                 .setContentTitle(note.getTitle())
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(note.getDescription()))
-                .addAction(R.drawable.ic_snooze, context.getString(R.string.see), snoozePendingIntent(context))
-                .setAutoCancel(true);
+                .setAutoCancel(true).setContentIntent(getPendingIntentSee(context))
+                .addAction(R.drawable.ic_snooze, context.getString(R.string.see), getPendingIntentSee(context))
+                .setDefaults(NotificationCompat.DEFAULT_ALL);
 
         if(note.getPriority()==PRIORITY_LOW){
             notificationBuilder
@@ -59,19 +61,19 @@ public class NotificationUtil {
             String channel_desc = context.getString(R.string.channel_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
 
-            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channel_name, importance);
-            channel.setDescription(channel_desc);
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channel_name, importance);
+            notificationChannel.setDescription(channel_desc);
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
 
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
 
-            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             if(notificationManager!=null)
-                notificationManager.createNotificationChannel(channel);
+                notificationManager.createNotificationChannel(notificationChannel);
         }
-
-        notificationBuilder.build().flags |= Notification.FLAG_AUTO_CANCEL;
-
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
 
@@ -79,8 +81,8 @@ public class NotificationUtil {
 
     }
 
-    private static PendingIntent snoozePendingIntent(Context context) {
+    private static PendingIntent getPendingIntentSee(Context context) {
         Intent startTodoListActivityIntent = new Intent(context, MainActivity.class);
-        return PendingIntent.getActivity(context, PENDING_INTENT_CHANNEL_ID, startTodoListActivityIntent, PendingIntent.FLAG_IMMUTABLE);
+        return PendingIntent.getActivity(context, NOTIFICATION_ID, startTodoListActivityIntent, PendingIntent.FLAG_ONE_SHOT);
     }
 }

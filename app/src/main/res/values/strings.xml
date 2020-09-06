@@ -47,5 +47,7 @@
     <string name="popup_regarding_notes">Do you want to add notes</string>
     <string name="cancel">Cancel</string>
     <string name="edit_button">Edit Button</string>
+    <string name="drawer_close">Drawer close</string>
+    <string name="drawer_open">Drawer open</string>
 
 </resources>

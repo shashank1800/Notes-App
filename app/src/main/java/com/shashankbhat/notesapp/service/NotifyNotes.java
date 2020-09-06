@@ -14,8 +14,10 @@ public class NotifyNotes extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         WorkManager workManager = WorkManager.getInstance(context);
         WorkRequest workRequest = new OneTimeWorkRequest.Builder(ShowNotesWorker.class).build();
         workManager.enqueue(workRequest);
+
     }
 }
