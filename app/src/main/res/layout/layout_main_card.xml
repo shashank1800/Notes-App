@@ -1,62 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="5dp"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
+    android:layout_marginBottom="5dp"
     android:background="@drawable/border"
     android:clipChildren="true"
-    android:padding="5dp"
+    android:padding="@dimen/main_card_margin"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/GreenText"
-        android:layout_marginStart="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StyleText.Title"/>
 
-    <ImageButton
-        android:id="@+id/edit"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/edit_button"
-        android:adjustViewBounds="true"
-        android:background="@drawable/ic_edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StyleText.Description" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/desc"
+        android:id="@+id/date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="5dp"
-        android:textColor="#002E51"
-        android:textSize="16sp"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintEnd_toStartOf="@+id/edit"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        android:autoLink="web"
+        style="@style/StyleText.Description" />
 
-    <com.shashankbhat.notesapp.view.CustomPriorityView
-        android:id="@+id/customPriorityView"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_margin="5dp"
-        app:priority="low"
-        app:layout_constrainedWidth="true"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.shashankbhat.notesapp.view.CustomPriorityView
+            android:id="@+id/customPriorityView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="start|center"
+            app:priority="low" />
+
+        <ImageButton
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/edit_button"
+            android:adjustViewBounds="true"
+            android:background="@drawable/ic_edit"
+            android:layout_gravity="end"/>
+    </FrameLayout>
+
+</LinearLayout>

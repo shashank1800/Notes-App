@@ -16,7 +16,9 @@ import java.util.Objects;
 public class Note implements Serializable {
 
     @NonNull
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
     private Date updatedDate;
     private Date finishBefore;
 
@@ -43,27 +45,6 @@ public class Note implements Serializable {
                 '}';
     }
 
-    @NonNull
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public Date getFinishBefore() {
-        return finishBefore;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,5 +60,54 @@ public class Note implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(updatedDate, finishBefore, title, description, priority);
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public Date getFinishBefore() {
+        return finishBefore;
+    }
+
+    public void setFinishBefore(Date finishBefore) {
+        this.finishBefore = finishBefore;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

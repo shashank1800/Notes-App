@@ -15,6 +15,7 @@ import com.shashankbhat.notesapp.R;
 import com.shashankbhat.notesapp.room.Note;
 import com.shashankbhat.notesapp.room.NoteDao;
 import com.shashankbhat.notesapp.room.NotesDatabase;
+import com.shashankbhat.notesapp.utils.DateFormatUtil;
 import com.shashankbhat.notesapp.view.CustomPriorityView;
 
 import java.lang.ref.WeakReference;
@@ -25,9 +26,7 @@ import java.util.Calendar;
  */
 public class NoteWidget extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
-
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         new GetOneNote(context, appWidgetManager, appWidgetId).execute();
     }
 
@@ -53,10 +52,16 @@ public class NoteWidget extends AppWidgetProvider {
         @Override
         protected void onPostExecute(Note note) {
             super.onPostExecute(note);
-            views.setTextViewText(R.id.title, note.getTitle());
-            views.setTextViewText(R.id.desc, note.getDescription());
-            views.setImageViewBitmap(R.id.priorityImage, getPriorityBitmap(contextWeakReference, note));
-            views.setOnClickPendingIntent(R.id.widget_layout, getPendingIntent(contextWeakReference.get()));
+
+            if(note!=null){
+                views.setTextViewText(R.id.title, note.getTitle());
+                views.setTextViewText(R.id.desc, note.getDescription());
+                views.setTextViewText(R.id.date_text_view, DateFormatUtil.getStandardDate(note.getFinishBefore()));
+                views.setImageViewBitmap(R.id.priorityImage, getPriorityBitmap(contextWeakReference, note));
+                views.setOnClickPendingIntent(R.id.widget_layout, getPendingIntent(contextWeakReference.get()));
+            }else{
+                views.setTextViewText(R.id.title, "No notes found");
+            }
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
@@ -86,15 +91,5 @@ public class NoteWidget extends AppWidgetProvider {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
-
-//    @Override
-//    public void onEnabled(Context context) {
-//        // Enter relevant functionality for when the first widget is created
-//    }
-//
-//    @Override
-//    public void onDisabled(Context context) {
-//        // Enter relevant functionality for when the last widget is disabled
-//    }
 }
 

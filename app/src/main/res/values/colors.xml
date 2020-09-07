@@ -6,12 +6,12 @@
 
     <color name="mainBackgroundColor">#fff</color>
 
-    <color name="medium">#FDD835</color>
-    <color name="low">#43A047</color>
-    <color name="high">#D81B60</color>
+    <color name="medium">#D5AF04</color>
+    <color name="low">#45BA4A</color>
+    <color name="high">#D55986</color>
 
-    <color name="random_color_1">#FBF0E1</color>
-    <color name="random_color_2">#C9E6FF</color>
-    <color name="random_color_3">#CDFFCF</color>
-    <color name="random_color_4">#FDD6E5</color>
+    <color name="random_color_1">#FDF7EE</color>
+    <color name="random_color_2">#E4EEF6</color>
+    <color name="random_color_3">#EDFDEE</color>
+    <color name="random_color_4">#FDEDF3</color>
 </resources>

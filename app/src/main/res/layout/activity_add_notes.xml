@@ -16,113 +16,124 @@
         <variable
             name="description"
             type="String" />
-        
+
         <variable
             name="title"
             type="String" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        tools:context=".ui.add_notes.AddNotes">
-
-        <EditText
-            android:id="@+id/title_et"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:text="@={title}"
-            android:hint="@string/title"
-            android:autofillHints="@string/title"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/desc_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:text="@={description}"
-            android:hint="@string/description"
-            android:autofillHints="@string/description"
-            android:inputType="text"
-            app:layout_constraintTop_toBottomOf="@+id/title_et"
-            tools:layout_editor_absoluteX="10dp" />
-
-        <DatePicker
-            android:id="@+id/date_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:datePickerMode="spinner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/desc_et" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:padding="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/date_picker">
+            tools:context=".ui.AddNotes">
 
-            <RadioButton
-                android:id="@+id/priority1"
+            <EditText
+                android:id="@+id/title_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:background="#CEFFD0"
-                android:text="@string/low"
-                android:textSize="20sp"
-                android:onClick="@{priorityListener}"/>
+                android:autofillHints="@string/title"
+                android:ems="10"
+                android:hint="@string/title"
+                android:inputType="text"
+                android:text="@={title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioButton
-                android:id="@+id/priority2"
-                android:layout_width="0dp"
+            <EditText
+                android:id="@+id/desc_et"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:text="@string/medium"
-                android:background="#FFFCAA"
-                android:textSize="20sp"
-                android:onClick="@{priorityListener}"/>
+                android:ems="10"
+                android:text="@={description}"
+                android:hint="@string/description"
+                android:autofillHints="@string/description"
+                android:inputType="text"
+                app:layout_constraintTop_toBottomOf="@+id/title_et"
+                tools:layout_editor_absoluteX="10dp" />
 
-            <RadioButton
-                android:id="@+id/priority3"
-                android:layout_width="0dp"
+            <DatePicker
+                android:id="@+id/date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="350dp"
+                android:layout_margin="5dp"
+                android:datePickerMode="calendar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/desc_et" />
+
+            <TextView
+                android:id="@+id/priority_tv"
+                style="@style/StyleText.Title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:text="@string/high"
-                android:background="#FFCBCD"
-                android:textSize="20sp"
-                android:onClick="@{priorityListener}"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/priority"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date_picker" />
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/priority_tv">
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/priority1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="#CEFFD0"
+                    android:text="@string/low"
+                    android:textSize="14sp"
+                    android:onClick="@{priorityListener}"/>
 
-        <Button
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/save"
-            android:onClick="@{saveListener}"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                <RadioButton
+                    android:id="@+id/priority2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:text="@string/medium"
+                    android:background="#FFFCAA"
+                    android:textSize="14sp"
+                    android:onClick="@{priorityListener}"/>
 
+                <RadioButton
+                    android:id="@+id/priority3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:text="@string/high"
+                    android:background="#FFCBCD"
+                    android:textSize="14sp"
+                    android:onClick="@{priorityListener}"/>
 
+            </RadioGroup>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/save"
+                android:onClick="@{saveListener}"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

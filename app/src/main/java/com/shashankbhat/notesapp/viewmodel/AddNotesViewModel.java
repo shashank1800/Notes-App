@@ -1,4 +1,4 @@
-package com.shashankbhat.notesapp.ui.add_notes;
+package com.shashankbhat.notesapp.viewmodel;
 
 import android.app.Application;
 

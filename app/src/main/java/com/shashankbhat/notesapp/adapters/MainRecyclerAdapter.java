@@ -1,14 +1,15 @@
 package com.shashankbhat.notesapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shashankbhat.notesapp.R;
 import com.shashankbhat.notesapp.room.Note;
+import com.shashankbhat.notesapp.ui.AddNotes;
+import com.shashankbhat.notesapp.utils.DateFormatUtil;
 import com.shashankbhat.notesapp.view.CustomPriorityView;
 
 /**
@@ -48,20 +51,21 @@ public class MainRecyclerAdapter extends PagedListAdapter<Note, MainRecyclerAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView title,desc;
-        ImageButton imageButton;
+        TextView title, desc, date;
+        ImageButton editButton;
 
         //Custom component
         CustomPriorityView priorityView;
 
-        ConstraintLayout layoutBackground;
+        LinearLayout layoutBackground;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             desc = itemView.findViewById(R.id.desc);
-            imageButton = itemView.findViewById(R.id.edit);
-            imageButton.setOnClickListener(this);
+            editButton = itemView.findViewById(R.id.edit);
+            editButton.setOnClickListener(this);
+            date = itemView.findViewById(R.id.date_text_view);
             layoutBackground = itemView.findViewById(R.id.layout_background);
 
             //Custom component
@@ -73,6 +77,7 @@ public class MainRecyclerAdapter extends PagedListAdapter<Note, MainRecyclerAdap
             desc.setText(note.getDescription());
             layoutBackground.getBackground().setTint(getRandomColor());
 
+            date.setText(DateFormatUtil.getStandardDate(note.getFinishBefore()));
             //Custom component
             priorityView.setPriority(note.getPriority());
         }
@@ -80,6 +85,9 @@ public class MainRecyclerAdapter extends PagedListAdapter<Note, MainRecyclerAdap
         @Override
         public void onClick(View v) {
 
+            Intent intent = new Intent(v.getContext(), AddNotes.class);
+            intent.putExtra("Note", getItem(getAdapterPosition()));
+            context.startActivity(intent);
         }
     }
 

@@ -42,7 +42,7 @@ public class NotificationUtil {
 
         if(note.getPriority()==PRIORITY_LOW){
             notificationBuilder
-                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setColor(ContextCompat.getColor(context, R.color.low));
         }else if(note.getPriority()==PRIORITY_MED){
             notificationBuilder
