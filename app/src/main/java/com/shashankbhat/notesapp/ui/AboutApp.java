@@ -17,5 +17,4 @@ public class AboutApp extends Fragment {
         return inflater.inflate(R.layout.fragment_about_app, container, false);
     }
 
-
 }

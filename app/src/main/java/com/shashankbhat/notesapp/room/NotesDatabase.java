@@ -1,12 +1,7 @@
 package com.shashankbhat.notesapp.room;
 
 import android.content.Context;
-import android.icu.util.Calendar;
-import android.os.AsyncTask;
-import android.os.Build;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -20,7 +15,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static com.shashankbhat.notesapp.utils.Constants.TABLE_NAME;
+import static com.shashankbhat.notesapp.utils.Constants.DATABASE_NAME;
 
 /**
  * Created by SHASHANK BHAT on 19-Jul-20.
@@ -38,7 +33,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     public static synchronized NotesDatabase getInstance(Context context) {
 
         if (instance == null) {
-            instance = Room.databaseBuilder(context, NotesDatabase.class, TABLE_NAME)
+            instance = Room.databaseBuilder(context, NotesDatabase.class, DATABASE_NAME)
                     .fallbackToDestructiveMigration()
                     .addCallback(getCallback(context))
                     .build();
@@ -49,7 +44,7 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     public static Callback getCallback(Context context){
 
-        RoomDatabase.Callback callback = new Callback() {
+        return new Callback() {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate(db);
@@ -61,8 +56,6 @@ public abstract class NotesDatabase extends RoomDatabase {
                 });
             }
         };
-
-        return callback;
     }
 
 }

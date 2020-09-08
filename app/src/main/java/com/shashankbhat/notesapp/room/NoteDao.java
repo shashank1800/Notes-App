@@ -1,5 +1,7 @@
 package com.shashankbhat.notesapp.room;
 
+import android.database.Cursor;
+
 import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -34,4 +36,7 @@ public interface NoteDao {
 
     @Query("SELECT * FROM NOTE_TABLE WHERE finishBefore >= :today ORDER BY finishBefore ASC, priority DESC LIMIT 1")
     Note getNearestDatedNotes(Date today);
+
+    @Query("SELECT * FROM note_table ORDER BY updatedDate ASC")
+    Cursor getAllNotesCursor();
 }

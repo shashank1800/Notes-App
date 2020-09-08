@@ -81,7 +81,7 @@ public class NoteWidget extends AppWidgetProvider {
 
     private static PendingIntent getPendingIntent(Context context){
         Intent intent = new Intent(context, MainActivity.class);
-        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @Override

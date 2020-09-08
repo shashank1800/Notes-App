@@ -3,9 +3,9 @@
 
     <SwitchPreferenceCompat
         app:defaultValue="true"
-        app:key="example_switch"
-        app:summary="Tablet mode shows notes in 2 column"
-        app:title="Table mode" />
+        app:key="tablet_mode"
+        app:summary="Tablet mode shows notes list in two columns"
+        app:title="Table Mode" />
 
 <!--    <ListPreference-->
 <!--        app:defaultValue="en"-->

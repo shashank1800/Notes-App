@@ -75,7 +75,7 @@ public class MainRecyclerAdapter extends PagedListAdapter<Note, MainRecyclerAdap
         private void bindData(Note note) {
             title.setText(note.getTitle());
             desc.setText(note.getDescription());
-            layoutBackground.getBackground().setTint(getRandomColor());
+            layoutBackground.getBackground().setTint(getPriorityCardColor(note.getPriority()));
 
             date.setText(DateFormatUtil.getStandardDate(note.getFinishBefore()));
             //Custom component
@@ -91,25 +91,20 @@ public class MainRecyclerAdapter extends PagedListAdapter<Note, MainRecyclerAdap
         }
     }
 
-    private int getRandomColor(){
+    private int getPriorityCardColor(int priority){
 
-        int min = 0, max = 3;
-        int randomNumber = (int)(Math.random() * (max - min + 1) + min);
-
-        switch (randomNumber){
-            case 0: return ContextCompat.getColor(context, R.color.random_color_1);
-            case 1: return ContextCompat.getColor(context, R.color.random_color_2);
-            case 2: return ContextCompat.getColor(context, R.color.random_color_3);
-            case 3: return ContextCompat.getColor(context, R.color.random_color_4);
+        switch (priority){
+            case 2: return ContextCompat.getColor(context, R.color.random_color_2);
+            case 3: return ContextCompat.getColor(context, R.color.random_color_3);
+            default: return ContextCompat.getColor(context, R.color.random_color_1);
         }
 
-        return context.getColor(R.color.high);
     }
 
     public static DiffUtil.ItemCallback<Note> DIFF_CALLBACK = new DiffUtil.ItemCallback<Note>() {
         @Override
         public boolean areItemsTheSame(@NonNull Note oldItem, @NonNull Note newItem) {
-            return oldItem==newItem;
+            return oldItem.getId()==newItem.getPriority();
         }
 
         @Override

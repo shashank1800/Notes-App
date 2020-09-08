@@ -8,11 +8,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import static com.shashankbhat.notesapp.utils.Constants.NOTES_TABLE;
+
 /**
  * Created by SHASHANK BHAT on 19-Jul-20.
  */
 
-@Entity(tableName = "note_table")
+@Entity(tableName = NOTES_TABLE)
 public class Note implements Serializable {
 
     @NonNull
@@ -34,6 +36,7 @@ public class Note implements Serializable {
         this.priority = priority;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Note{" +

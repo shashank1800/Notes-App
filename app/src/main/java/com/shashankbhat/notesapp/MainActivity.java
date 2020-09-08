@@ -5,19 +5,17 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -26,7 +24,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.shashankbhat.notesapp.room.Note;
-import com.shashankbhat.notesapp.service.NotifyNotes;
+import com.shashankbhat.notesapp.broadcast.NotifyNotes;
 import com.shashankbhat.notesapp.viewmodel.MainActivityViewModel;
 import com.shashankbhat.notesapp.viewmodel.MainViewModelFactory;
 
@@ -40,11 +38,13 @@ public class MainActivity extends AppCompatActivity{
     private Context context;
     private static final int NOTIFICATION_ID = 10;
     private DrawerLayout drawerLayout;
+    private AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Log.i(TAG, "onCreate");
 
         context = this;
@@ -52,25 +52,33 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_container);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navView = findViewById(R.id.nav_view);
-
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.showAllNotes, R.id.settings)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_container);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+        setUpNavigation(drawerLayout, navController);
 
 //        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         MainViewModelFactory factory = new MainViewModelFactory(getApplication(), 10);
         viewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
 
     }
+
+    private void setUpNavigation(DrawerLayout drawerLayout, NavController navController) {
+
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home, R.id.nav_settings, R.id.nav_about)
+                .setOpenableLayout(drawerLayout)
+                .build();
+
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationView navView = findViewById(R.id.nav_view);
+        NavigationUI.setupWithNavController(navView, navController);
+
+    }
+
 
     @Override
     protected void onStart() {
@@ -81,8 +89,6 @@ public class MainActivity extends AppCompatActivity{
         notificationManager.cancel(NOTIFICATION_ID);
         scheduleNotificationWork();
     }
-
-
 
     @Override
     protected void onResume() {
@@ -148,7 +154,14 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
 
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else
+            super.onBackPressed();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

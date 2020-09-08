@@ -6,12 +6,14 @@
 
     <color name="mainBackgroundColor">#fff</color>
 
-    <color name="medium">#D5AF04</color>
     <color name="low">#45BA4A</color>
+    <color name="medium">#0576DA</color>
     <color name="high">#D55986</color>
 
-    <color name="random_color_1">#FDF7EE</color>
+    <color name="gray">#DAD9D9</color>
+
+<!--    <color name="random_color_1">#FDF7EE</color>-->
+    <color name="random_color_1">#EDFDEE</color>
     <color name="random_color_2">#E4EEF6</color>
-    <color name="random_color_3">#EDFDEE</color>
-    <color name="random_color_4">#FDEDF3</color>
+    <color name="random_color_3">#FDEDF3</color>
 </resources>

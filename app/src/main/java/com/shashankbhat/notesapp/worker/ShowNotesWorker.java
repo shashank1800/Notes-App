@@ -1,4 +1,4 @@
-package com.shashankbhat.notesapp.task;
+package com.shashankbhat.notesapp.worker;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,7 +9,7 @@ import androidx.work.WorkerParameters;
 
 import com.shashankbhat.notesapp.room.Note;
 import com.shashankbhat.notesapp.room.NoteRepository;
-import com.shashankbhat.notesapp.utils.NotificationUtil;
+import com.shashankbhat.notesapp.notification.NotificationUtil;
 
 
 /**
