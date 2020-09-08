@@ -16,7 +16,6 @@ import com.shashankbhat.notesapp.room.Note;
 import com.shashankbhat.notesapp.viewmodel.AddNotesViewModel;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import static com.shashankbhat.notesapp.utils.Constants.PRIORITY_HIGH;
 import static com.shashankbhat.notesapp.utils.Constants.PRIORITY_LOW;
@@ -25,7 +24,7 @@ import static com.shashankbhat.notesapp.utils.Constants.PRIORITY_MED;
 public class AddNotes extends AppCompatActivity {
 
     private int priority = 1;
-    private Date finishBeforeDate = Calendar.getInstance().getTime();
+    private Calendar finishBefore = Calendar.getInstance();
     private Note note;
     private DatePicker.OnDateChangedListener onDateChangedListener;
 
@@ -38,21 +37,25 @@ public class AddNotes extends AppCompatActivity {
 
         AddNotesViewModel addNotesViewModel = ViewModelProviders.of(this).get(AddNotesViewModel.class);
 
+        binding.datePicker.setMinDate(finishBefore.getTimeInMillis());
+        finishBefore.set(Calendar.YEAR, finishBefore.getWeekYear() + 1900);
+
         note = (Note) getIntent().getSerializableExtra("Note");
         System.out.println("Notes "+note);
         if(note !=null){
             binding.setTitle(note.getTitle());
             binding.setDescription(note.getDescription());
-            switch (note.getPriority()){
+            priority = note.getPriority();
+            finishBefore.setTime(note.getFinishBefore());
+            switch (priority){
                 case 2: binding.priority2.setChecked(true);
                         break;
                 case 3: binding.priority3.setChecked(true);
                         break;
                 default: binding.priority1.setChecked(true);
             }
-            binding.datePicker.init(note.getUpdatedDate().getYear()+1900, note.getUpdatedDate().getMonth(), note.getUpdatedDate().getDay(), getDateChangeListener());
         }else{
-            note = new Note(Calendar.getInstance().getTime(), finishBeforeDate, "","", priority);
+            note = new Note(Calendar.getInstance().getTime(), finishBefore.getTime(), "","", priority);
             binding.priority1.setChecked(true);
         }
 
@@ -79,7 +82,7 @@ public class AddNotes extends AppCompatActivity {
             if(title!=null && description!=null && !title.isEmpty() && !description.isEmpty()){
                 note.setTitle(title);
                 note.setDescription(description);
-                note.setFinishBefore(finishBeforeDate);
+                note.setFinishBefore(finishBefore.getTime());
                 note.setPriority(priority);
                 note.setUpdatedDate(Calendar.getInstance().getTime());
 
@@ -97,9 +100,9 @@ public class AddNotes extends AppCompatActivity {
 
         if(onDateChangedListener==null) {
             onDateChangedListener = (view, year, monthOfYear, dayOfMonth) -> {
-                finishBeforeDate.setYear(year);
-                finishBeforeDate.setMonth(monthOfYear);
-                finishBeforeDate.setDate(dayOfMonth);
+                finishBefore.set(Calendar.YEAR, year+1900);
+                finishBefore.set(Calendar.MONTH, monthOfYear);
+                finishBefore.set(Calendar.DATE, dayOfMonth);
             };
         }
         return onDateChangedListener;

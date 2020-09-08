@@ -127,10 +127,10 @@ public class MainActivity extends AppCompatActivity{
 
         myAlertBuilder.setTitle("Delete");
         if(isDeleteAll) {
-            myAlertBuilder.setMessage("Do yo want to delete all note ?");
+            myAlertBuilder.setMessage("Do you want to delete all note?");
             myAlertBuilder.setPositiveButton(R.string.yes, (dialog, which) -> viewModel.vmDeleteAllNotes());
         } else {
-            myAlertBuilder.setMessage("Do yo want to delete this note ?");
+            myAlertBuilder.setMessage("Do you want to delete this note?");
             myAlertBuilder.setPositiveButton(R.string.yes, (dialog, which) -> viewModel.vmDelete(note));
         }
 

@@ -11,12 +11,11 @@ import java.util.Date;
  */
 public class DateFormatUtil {
 
-    static String []months = new String[]{"Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    static String []months = new String[]{"January", "February", "March", "April","May", "Jun", "July", "August", "September", "October", "November", "December"};
 
     public static Spanned getStandardDate(Date date){
         int day = date.getDate();
         int month = date.getMonth();
-        int year = date.getYear();
-        return HtmlCompat.fromHtml("<b>Date </b> <i>"+day+"/"+months[month]+"/"+year+"</i>", HtmlCompat.FROM_HTML_MODE_COMPACT);
+        return HtmlCompat.fromHtml("<b><i>"+months[month]+" "+day+"</i></b>", HtmlCompat.FROM_HTML_MODE_COMPACT);
     }
 }

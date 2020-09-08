@@ -41,20 +41,20 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="channel_description">This is to remind before expiry time</string>
+    <string name="channel_description">Notes notification</string>
     <string name="channel_name">Expiry date</string>
-    <string name="yes">" Yes "</string>
+    <string name="yes">Yes</string>
     <string name="popup_regarding_notes">Do you want to add notes</string>
     <string name="cancel">Cancel</string>
     <string name="edit_button">Edit Button</string>
     <string name="drawer_close">Drawer close</string>
     <string name="drawer_open">Drawer open</string>
-    <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="priority">Priority</string>
 
     <string name="home">Home</string>
     <string name="about">About</string>
+
     <string name="about_app"><big><b>Notes App</b></big> is a good helper to manage your schedules and notes. Write down whats on your mind and get reminder everyday.
         \n\n<big><b>Key features :</b></big>
             \n<p>- Add notes quickly with some description and it can be edited be later.</p>
@@ -80,7 +80,7 @@
         \n<p>Provides option to move between the screens.</p>
 
         \n\n<p><b>Content Provider</b></p>
-        \n<p>It presents data to external applications. Access notes data by content uri <font color="#ACACAC">content:\/\/com.shashankbhat.notesapp\/note_table</font> with other applications</p>
+        \n<p>It presents data to external applications. Access notes data by content uri <font color="#ACACAC">content:\/\/com.shashankbhat.notesapp\/note_table</font> to get all notes data.</p>
 
         \n\n<p><b>Widget</b></p>
         \n<p>Add widget to home screen that shows a note and easy to open</p>
