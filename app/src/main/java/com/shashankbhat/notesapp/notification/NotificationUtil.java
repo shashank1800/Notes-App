@@ -32,11 +32,11 @@ public class NotificationUtil {
     public static void notify(Context context, Note note){
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_star_yellow)
+                .setSmallIcon(R.drawable.circle)
                 .setContentTitle(note.getTitle())
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(note.getDescription()))
                 .setAutoCancel(true).setContentIntent(getPendingIntentSee(context))
-                .addAction(R.drawable.ic_snooze, context.getString(R.string.see), getPendingIntentSee(context))
+                .addAction(R.drawable.ic_app_icon, context.getString(R.string.see), getPendingIntentSee(context))
                 .setDefaults(NotificationCompat.DEFAULT_ALL);
 
         if(note.getPriority()==PRIORITY_LOW){

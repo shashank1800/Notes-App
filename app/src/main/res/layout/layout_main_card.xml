@@ -20,12 +20,14 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/title"
+            android:transitionName="@string/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/StyleText.Title"/>
 
         <TextView
             android:id="@+id/desc"
+            android:transitionName="@string/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/StyleText.Description" />
@@ -45,9 +47,9 @@
 
         <com.shashankbhat.notesapp.view.CustomPriorityView
             android:id="@+id/customPriorityView"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="start|center"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="start|bottom"
             app:priority="low" />
 
         <ImageButton

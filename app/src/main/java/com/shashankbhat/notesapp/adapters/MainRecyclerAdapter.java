@@ -1,5 +1,6 @@
 package com.shashankbhat.notesapp.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,11 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.shashankbhat.notesapp.MainActivity;
 import com.shashankbhat.notesapp.R;
 import com.shashankbhat.notesapp.room.Note;
 import com.shashankbhat.notesapp.ui.AddNotes;
@@ -85,9 +89,15 @@ public class MainRecyclerAdapter extends PagedListAdapter<Note, MainRecyclerAdap
         @Override
         public void onClick(View v) {
 
+            Pair<View, String> pair1 = Pair.create(title, context.getResources().getString(R.string.title));
+            Pair<View, String> pair2 = Pair.create(desc, context.getResources().getString(R.string.description));
+
+            //noinspection unchecked
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, pair1, pair2);
+
             Intent intent = new Intent(v.getContext(), AddNotes.class);
             intent.putExtra("Note", getItem(getAdapterPosition()));
-            context.startActivity(intent);
+            context.startActivity(intent, options.toBundle());
         }
     }
 

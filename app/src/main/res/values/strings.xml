@@ -77,7 +77,7 @@
         \n<p>ViewModel is helper class for the UI controller that is responsible for preparing data for the UI. Data is automatically retained during configuration changes so that data they hold is immediately available to the next activity or fragment instance. Creates <font color="#ACACAC">ViewModel</font> instance with <font color="#ACACAC">ViewModelProvider</font>, which will create ViewModels via the custom Factory and retain them in the given store.</p>
 
         \n\n<p><b>Navigation Drawer</b></p>
-        \n<p>Provides option to move between the screens</p>
+        \n<p>Provides option to move between the screens.</p>
 
         \n\n<p><b>Content Provider</b></p>
         \n<p>It presents data to external applications. Access notes data by content uri <font color="#ACACAC">content:\/\/com.shashankbhat.notesapp\/note_table</font> with other applications</p>
@@ -92,7 +92,7 @@
         \n<p>It does background work when it receives broadcast message from <font color="#ACACAC">AlarmManager</font>. Broadcast receiver initializes a <font color="#ACACAC">Worker</font> and that sends notification.</p>
 
         \n\n<p><b>Custom view component</b></p>
-        \n<p>Priority of each notes is shown with custom component star based on priority</p>
+        \n<p>Priority of each notes is shown with custom component.</p>
 
         \n\n <b>GitHub link</b>  <a href="https://github.com/shashank1800/Notes-App">https://github.com/shashank1800/Notes-App</a>
 

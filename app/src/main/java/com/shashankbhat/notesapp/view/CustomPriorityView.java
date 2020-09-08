@@ -42,13 +42,16 @@ public class CustomPriorityView extends AppCompatImageView {
 
         switch (priority){
             case 1:
-                setImageResource(R.drawable.ic_star_green);
+                setBackground(getResources().getDrawable(R.drawable.circle));
+                getBackground().setTint(getResources().getColor(R.color.low));
                 break;
             case 2:
-                setImageResource(R.drawable.ic_star_yellow);
+                setBackground(getResources().getDrawable(R.drawable.circle));
+                getBackground().setTint(getResources().getColor(R.color.medium));
                 break;
             case 3:
-                setImageResource(R.drawable.ic_star_red);
+                setBackground(getResources().getDrawable(R.drawable.circle));
+                getBackground().setTint(getResources().getColor(R.color.high));
                 break;
         }
     }

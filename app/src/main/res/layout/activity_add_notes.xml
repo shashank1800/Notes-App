@@ -33,6 +33,7 @@
             tools:context=".ui.AddNotes">
 
             <EditText
+                android:transitionName="@string/title"
                 android:id="@+id/title_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -48,6 +49,7 @@
 
             <EditText
                 android:id="@+id/desc_et"
+                android:transitionName="@string/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

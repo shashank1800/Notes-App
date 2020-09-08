@@ -34,6 +34,7 @@
 
             <EditText
                 android:id="@+id/title_et"
+                android:transitionName="@string/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -47,6 +48,7 @@
 
             <EditText
                 android:id="@+id/desc_et"
+                android:transitionName="@string/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
