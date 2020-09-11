@@ -1,8 +1,7 @@
 package com.shashankbhat.notesapp;
 
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -10,7 +9,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
-    @Test
+    @org.junit.Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }

@@ -24,7 +24,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.shashankbhat.notesapp.room.Note;
-import com.shashankbhat.notesapp.broadcast.NotifyNotes;
+import com.shashankbhat.notesapp.broadcast_receivers.NotifyNotes;
 import com.shashankbhat.notesapp.viewmodel.MainActivityViewModel;
 import com.shashankbhat.notesapp.viewmodel.MainViewModelFactory;
 

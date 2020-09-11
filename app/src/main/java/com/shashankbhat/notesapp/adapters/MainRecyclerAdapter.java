@@ -18,7 +18,6 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.shashankbhat.notesapp.MainActivity;
 import com.shashankbhat.notesapp.R;
 import com.shashankbhat.notesapp.room.Note;
 import com.shashankbhat.notesapp.ui.AddNotes;

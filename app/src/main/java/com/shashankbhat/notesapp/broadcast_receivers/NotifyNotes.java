@@ -1,4 +1,4 @@
-package com.shashankbhat.notesapp.broadcast;
+package com.shashankbhat.notesapp.broadcast_receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

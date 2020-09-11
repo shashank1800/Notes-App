@@ -57,6 +57,9 @@ public class ShowAllNotes extends Fragment {
         viewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
 
         setupRecyclerView(recycler);
+
+//        val action = TasksFragmentDirections.actionTasksFragmentToTaskDetailFragment(taskId)
+//        findNavController().navigate(action)
     }
 
     private void moveToAddNotes(View view) {

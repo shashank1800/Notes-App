@@ -5,7 +5,7 @@
         app:defaultValue="true"
         app:key="tablet_mode"
         app:summary="Tablet mode shows notes list in two columns"
-        app:title="Table Mode" />
+        app:title="Tablet Mode" />
 
 <!--    <ListPreference-->
 <!--        app:defaultValue="en"-->
