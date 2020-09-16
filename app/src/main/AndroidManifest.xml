@@ -33,7 +33,7 @@
                 android:resource="@xml/note_widget_info" />
         </receiver>
         <receiver
-            android:name=".broadcast_receivers.NotifyNotes"
+            android:name=".receivers.NotifyNotes"
             android:enabled="true"
             android:exported="false" />
 

@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,12 +21,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.shashankbhat.notesapp.room.Note;
-import com.shashankbhat.notesapp.broadcast_receivers.NotifyNotes;
+import com.shashankbhat.notesapp.receivers.NotifyNotes;
 import com.shashankbhat.notesapp.viewmodel.MainActivityViewModel;
 import com.shashankbhat.notesapp.viewmodel.MainViewModelFactory;
 
@@ -64,6 +67,16 @@ public class MainActivity extends AppCompatActivity{
 //        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         MainViewModelFactory factory = new MainViewModelFactory(getApplication(), 10);
         viewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
+
+
+//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+//            if(destination.getId() == R.id.nav_home) {
+//                toolbar.setMenu();
+//            } else {
+//                toolbar.getMenu().clear();
+//            }
+//        });
+
 
     }
 

@@ -22,10 +22,6 @@ public class MainActivityViewModel extends AndroidViewModel {
         noteRepository = new NoteRepository(application);
     }
 
-    public void vmUpdate(Note note) {
-        noteRepository.repoUpdate(note);
-    }
-
     public void vmDelete(Note note) {
         noteRepository.repoDelete(note);
     }

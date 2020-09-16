@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -14,6 +17,25 @@ import com.shashankbhat.notesapp.notification.NotificationUtil;
 
 /**
  * Created by SHASHANK BHAT on 22-Jul-20.
+ */
+
+/**
+ *
+ *             Constraints constraints = new Constraints.Builder()
+ *                 .setRequiredNetworkType(NetworkType.UNMETERED)
+ *                 .setRequiresCharging(true)
+ *                 .setRequiresBatteryNotLow(true)
+ *                 .setRequiresDeviceIdle(true)
+ *                 .build();
+ *
+ *     WorkManager workManager = WorkManager.getInstance(context);
+ *     WorkRequest workRequest = new OneTimeWorkRequest
+ *             .Builder(ShowNotesWorker.class)
+ *                 .setConstraints(constraints)
+ *             .build();
+ *
+ *         workManager.enqueue(workRequest);
+ *
  */
 public class ShowNotesWorker extends Worker {
 

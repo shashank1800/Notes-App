@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -41,6 +42,7 @@
                 android:layout_margin="4dp"
                 android:hint="@string/title">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/title_ed"
                     android:text="@={title}"
                     android:transitionName="@string/title"
                     android:layout_width="match_parent"
@@ -54,6 +56,7 @@
                 android:layout_margin="4dp"
                 android:hint="@string/description">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/description_et"
                     android:text="@={description}"
                     android:transitionName="@string/description"
                     android:layout_width="match_parent"
@@ -63,9 +66,11 @@
             <DatePicker
                 android:id="@+id/date_picker"
                 android:layout_width="wrap_content"
-                android:layout_height="350dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:datePickerMode="calendar" />
+                android:calendarViewShown="false"
+                android:spinnersShown="true"
+                android:datePickerMode="spinner" />
 
             <TextView
                 android:id="@+id/priority_tv"

@@ -94,9 +94,6 @@ public class ShowAllNotes extends Fragment {
         viewModel.getAllNotes().observe(requireActivity(), adapter::submitList);
     }
 
-
-
-
     private void setItemTouchHelper(RecyclerView recyclerView, MainRecyclerAdapter adapter) {
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT ) {

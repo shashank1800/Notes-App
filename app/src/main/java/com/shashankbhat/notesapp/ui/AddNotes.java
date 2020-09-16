@@ -1,15 +1,12 @@
 package com.shashankbhat.notesapp.ui;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.widget.DatePicker;
-import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.shashankbhat.notesapp.R;
 import com.shashankbhat.notesapp.databinding.ActivityAddNotesBinding;
 import com.shashankbhat.notesapp.room.Note;
@@ -24,88 +21,92 @@ import static com.shashankbhat.notesapp.utils.Constants.PRIORITY_MED;
 public class AddNotes extends AppCompatActivity {
 
     private int priority = 1;
-    private Calendar finishBefore = Calendar.getInstance();
     private Note note;
-    private DatePicker.OnDateChangedListener onDateChangedListener;
+    private Calendar todayCalender = Calendar.getInstance();
+    private ActivityAddNotesBinding binding;
+    private AddNotesViewModel addNotesViewModel;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityAddNotesBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_add_notes);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_notes);
         binding.setLifecycleOwner(this);
 
-        AddNotesViewModel addNotesViewModel = ViewModelProviders.of(this).get(AddNotesViewModel.class);
-
-        binding.datePicker.setMinDate(finishBefore.getTimeInMillis());
-        finishBefore.set(Calendar.YEAR, finishBefore.getWeekYear() + 1900);
+        addNotesViewModel = ViewModelProviders.of(this).get(AddNotesViewModel.class);
 
         note = (Note) getIntent().getSerializableExtra("Note");
-        System.out.println("Notes "+note);
-        if(note !=null){
-            binding.setTitle(note.getTitle());
-            binding.setDescription(note.getDescription());
-            priority = note.getPriority();
-            finishBefore.setTime(note.getFinishBefore());
-            switch (priority){
-                case 2: binding.priority2.setChecked(true);
-                        break;
-                case 3: binding.priority3.setChecked(true);
-                        break;
-                default: binding.priority1.setChecked(true);
-            }
-        }else{
-            note = new Note(Calendar.getInstance().getTime(), finishBefore.getTime(), "","", priority);
-            binding.priority1.setChecked(true);
-        }
 
-        binding.setPriorityListener(view -> {
+        if(note !=null) updateUI();
+        else clearUI();
 
-            switch (view.getId()){
-                case R.id.priority1:
-                    priority = PRIORITY_LOW;
-                    break;
-                case R.id.priority2:
-                    priority = PRIORITY_MED;
-                    break;
-                case R.id.priority3:
-                    priority = PRIORITY_HIGH;
-                    break;
-            }
-        });
-
-        binding.datePicker.setOnDateChangedListener(getDateChangeListener());
-
-        binding.setSaveListener(view -> {
-            String title = binding.getTitle();
-            String description = binding.getDescription();
-            if(title!=null && description!=null && !title.isEmpty() && !description.isEmpty()){
-                note.setTitle(title);
-                note.setDescription(description);
-                note.setFinishBefore(finishBefore.getTime());
-                note.setPriority(priority);
-                note.setUpdatedDate(Calendar.getInstance().getTime());
-
-                addNotesViewModel.saveNote(note);
-                Toast.makeText(getApplicationContext(), "Notes saved", Toast.LENGTH_SHORT).show();
-                finish();
-            }else{
-                Toast.makeText(getApplicationContext(), "Some fields is empty", Toast.LENGTH_SHORT).show();
-            }
-        });
+        binding.setPriorityListener(view -> setPriority(view.getId()));
+        binding.setSaveListener(view -> saveNote());
 
     }
 
-    public DatePicker.OnDateChangedListener getDateChangeListener(){
+    private void clearUI() {
+        note = new Note(Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), "","", priority);
+        binding.priority1.setChecked(true);
+        binding.setTitle("");
+        binding.setDescription("");
+        priority = 1;
+    }
 
-        if(onDateChangedListener==null) {
-            onDateChangedListener = (view, year, monthOfYear, dayOfMonth) -> {
-                finishBefore.set(Calendar.YEAR, year+1900);
-                finishBefore.set(Calendar.MONTH, monthOfYear);
-                finishBefore.set(Calendar.DATE, dayOfMonth);
-            };
+    private void updateUI() {
+        binding.setTitle(note.getTitle());
+        binding.setDescription(note.getDescription());
+        priority = note.getPriority();
+
+        todayCalender.setTimeInMillis(note.getFinishBefore().getTime());
+        binding.datePicker.updateDate(todayCalender.get(Calendar.YEAR), todayCalender.get(Calendar.MONTH), todayCalender.get(Calendar.DAY_OF_MONTH));
+
+        switch (priority){
+            case 2: binding.priority2.setChecked(true);
+                break;
+            case 3: binding.priority3.setChecked(true);
+                break;
+            default: binding.priority1.setChecked(true);
         }
-        return onDateChangedListener;
+    }
+
+    private void saveNote(){
+        String title = binding.getTitle();
+        String description = binding.getDescription();
+        int year = binding.datePicker.getYear();
+        int month = binding.datePicker.getMonth();
+        int day = binding.datePicker.getDayOfMonth();
+
+        Calendar date = Calendar.getInstance();
+        date.set(year, month, day, 0, 0, 0);
+
+        if(title!=null && description!=null && !title.isEmpty() && !description.isEmpty()){
+            note.setTitle(title);
+            note.setDescription(description);
+            note.setFinishBefore(date.getTime());
+            note.setPriority(priority);
+            note.setUpdatedDate(Calendar.getInstance().getTime());
+
+            addNotesViewModel.saveNote(note);
+
+            Snackbar.make(binding.linearLayout, "Notes saved", Snackbar.LENGTH_SHORT).show();
+            clearUI();
+        }else{
+            Snackbar.make(binding.linearLayout, "Some fields are empty", Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setPriority(int priority){
+        switch (priority){
+            case R.id.priority1:
+                this.priority = PRIORITY_LOW;
+                break;
+            case R.id.priority2:
+                this.priority = PRIORITY_MED;
+                break;
+            case R.id.priority3:
+                this.priority = PRIORITY_HIGH;
+                break;
+        }
     }
 
 }
